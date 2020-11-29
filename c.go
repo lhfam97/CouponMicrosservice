@@ -41,7 +41,13 @@ func main() {
 }
 
 
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+}
+
 func home(w http.ResponseWriter, r *http.Request) {
+
+	enableCors(&w)
 	couponName := r.URL.Query().Get("coupon")
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 	"password=%s dbname=%s sslmode=disable",
